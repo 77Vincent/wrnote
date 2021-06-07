@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = [{
     mode: 'development',
     entry: './main.js',
+    devtool: 'source-map',
     target: 'electron-main',
     module: {
         rules: [{

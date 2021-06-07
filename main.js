@@ -24,14 +24,14 @@ function createWindow() {
     // mainWindow.webContents.openDevTools()
 }
 
-app.whenReady().then(() => {
+app.on('ready', () => {
     createWindow()
+})
 
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
-        }
-    })
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow()
+    }
 })
 
 app.on('window-all-closed', function () {
