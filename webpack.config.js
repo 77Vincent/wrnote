@@ -4,18 +4,15 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = [{
     mode: 'development',
-    entry: './main.js',
-    devtool: 'source-map',
-    target: 'electron-main',
+    entry: './src/renderer/index.js',
+    devtool: 'cheap-module-source-map',
+    target: 'web',
     module: {
         rules: [{
             test: /\.m?js$/,
             exclude: /(node_modules|bower_components)/,
             use: {
                 loader: 'babel-loader',
-                options: {
-                    presets: ['@babel/preset-env']
-                }
             }
         }]
     },
