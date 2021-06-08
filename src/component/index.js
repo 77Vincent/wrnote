@@ -1,2 +1,4 @@
 export { default as Editor } from './editor'
-export { Section } from './styled'
+export {
+    Section,
+} from './styled'

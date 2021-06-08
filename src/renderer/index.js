@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import 'normalize.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 import Entry from './entry';
 
