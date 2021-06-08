@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 
-export default ( props ) => {
+import {Editor} from "../component";
+
+export default () => {
+    const content = `## hello world\n### yes`
     return (
-        <div className='hello'>
-            <h1>Hello World!</h1>
+        <div className='root'>
+            <Editor />
         </div>
     );
 };
