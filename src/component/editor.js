@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 import {Container, Col, Row} from "react-bootstrap";
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import {tomorrow as theme} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const StyledTextarea = styled.textarea`
     min-height: 100vh;
@@ -58,6 +60,23 @@ function helloWorld() {
 ###### 1.1.1.1.1.1 hello world
 `
 
+const components = {
+    code({node, inline, className, children, ...props}) {
+        const match = /language-(\w+)/.exec(className || '')
+        return !inline && match ? (
+            <SyntaxHighlighter
+                style={theme}
+                language={match[1]}
+                PreTag="div"
+                children={String(children).replace(/\n$/, '')}
+                {...props}
+            />
+        ) : (
+            <code className={className} {...props} />
+        )
+    }
+}
+
 export default ({initialContent = dummyText}) => {
     const [content, setContent] = useState(initialContent)
     const onType = ({target: {value}}) => setContent(() => value)
@@ -72,7 +91,7 @@ export default ({initialContent = dummyText}) => {
                 </Col>
 
                 <Col>
-                    <StyledReactMarkdown children={content}/>
+                    <StyledReactMarkdown components={components} children={content}/>
                 </Col>
             </Row>
         </Container>
