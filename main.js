@@ -2,7 +2,7 @@
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
-const { NODE_ENV } = process.env
+const {NODE_ENV} = process.env
 const isDev = NODE_ENV !== 'production'
 
 function createWindow() {
@@ -10,6 +10,7 @@ function createWindow() {
     const mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        backgroundColor: '#2e2c29',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
         }

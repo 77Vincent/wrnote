@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import ReactMarkdown from "react-markdown";
 import styled from "styled-components";
 import {Container, Col, Row} from "react-bootstrap";
@@ -6,18 +6,19 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import {tomorrow as theme} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const StyledTextarea = styled.textarea`
-    min-height: 100vh;
+    height: 100vh;
     border: none;
     width: 100%;
     padding: 1em;
     overflow: auto;
     resize: none;
+    tab-size: 4;
     &:focus {
         outline: none;
     }
 `
 const StyledReactMarkdown = styled(ReactMarkdown)`
-    min-height: 100vh;
+    height: 100vh;
     padding: 1em;
     overflow: auto;
     
@@ -28,6 +29,7 @@ const StyledReactMarkdown = styled(ReactMarkdown)`
     
     h2 {
         margin-top: 0.8em;
+        font-weight: bold;
     }
     
     h3 {
@@ -77,21 +79,50 @@ const components = {
     }
 }
 
-export default ({initialContent = dummyText}) => {
-    const [content, setContent] = useState(initialContent)
-    const onType = ({target: {value}}) => setContent(() => value)
+export default ({initialText = dummyText}) => {
+    const textareaEl = useRef()
+    const [content, setContent] = useState({
+        value: initialText,
+        caret: -1,
+    })
+
+    const onType = (e) => setContent({
+        value: e.target.value,
+        caret: e.target.selectionEnd,
+    })
+    const onKeydown = (e) => {
+        if (e.Key === 'Tab' || e.which === 9) {
+            e.preventDefault()
+            const {value, selectionStart: start, selectionEnd: end} = e.target
+            const c = value.substring(0, start) + '\t' + value.substring(end)
+            setContent({
+                value: c,
+                caret: start + 1,
+            })
+        }
+    }
+
+    useEffect(() => {
+        console.log(content.caret)
+        textareaEl.current.setSelectionRange(content.caret, content.caret )
+    }, [content])
 
     return (
         <Container fluid>
             <Row>
                 <Col>
                     <form>
-                        <StyledTextarea value={content} onChange={onType}/>
+                        <StyledTextarea
+                            ref={textareaEl}
+                            value={content.value}
+                            onKeyDown={onKeydown}
+                            onChange={onType}
+                        />
                     </form>
                 </Col>
 
                 <Col>
-                    <StyledReactMarkdown components={components} children={content}/>
+                    <StyledReactMarkdown components={components} children={content.value}/>
                 </Col>
             </Row>
         </Container>
