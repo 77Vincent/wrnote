@@ -23,13 +23,15 @@ const StyledReactMarkdown = styled(ReactMarkdown)`
     overflow: auto;
     
     h1 {
+        font-size: 2.4em;
         border-bottom: 1px solid lightgray;
         margin-top: 0.5em;
     }
     
     h2 {
-        margin-top: 0.8em;
         font-weight: bold;
+        font-size: 1.8em;
+        margin-top: 0.8em;
     }
     
     h3 {
@@ -49,7 +51,9 @@ const dummyText = `
 # 1 hello world
 ## 1.1 hello world
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-### 1.1.1 hello world
+## 1.2 hello world
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+### 1.2.1 hello world
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 #### 1.1.1.1 hello world
 \`\`\`js
